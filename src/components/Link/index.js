@@ -1,1 +1,3 @@
-export { Link } from "./Link.component";
+import Link from "next/link";
+
+export { Link };

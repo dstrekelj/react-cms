@@ -1,6 +1,6 @@
 import { Shell as Component } from "./index";
 
-const Story = (props) => <Component {...props} />;
+const Story = (props: any) => <Component {...props} />;
 
 export const ShellStory = Story.bind({});
 

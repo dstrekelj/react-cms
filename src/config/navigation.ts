@@ -8,7 +8,7 @@ const navigation = [
   {
     id: "users",
     name: "Users",
-    path: "/users",
+    path: "/resources/users",
     icon: "People",
   },
 ];
