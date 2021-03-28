@@ -1,14 +1,10 @@
 import { rest } from "msw";
 
-const users = [
-  {
-    id: "404012b7-e76b-4c0f-9f20-4ab6012df129",
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@email.mock",
-    active: true,
-  },
-];
+const users = [];
+
+for (let i = 0; i < 100; i++) {
+  users.push({ type: "users", id: i, attributes: { username: `user${i}` } });
+}
 
 function getUser(id) {
   return users.find((user) => user.id === id);
@@ -28,13 +24,19 @@ function removeUser(id) {
 
 export const handlers = [
   rest.get("https://api.mock/api/users", (req, res, ctx) => {
+    const offset = Number(req.url.searchParams.get("page[offset]")) || 1;
+    const limit = Number(req.url.searchParams.get("page[limit]")) || 10;
+    const totalPages = Math.ceil(users.length / limit);
+    const startIndex = (offset - 1) * limit;
+
     return res(
       ctx.json({
-        data: users,
+        data: users.slice(startIndex, startIndex + limit),
         meta: {
-          page: 1,
-          limit: 10,
-          total: 1,
+          offset: offset,
+          limit: limit,
+          total: users.length,
+          totalPages: totalPages,
         },
       }),
     );

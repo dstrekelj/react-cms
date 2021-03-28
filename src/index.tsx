@@ -4,14 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider as CmsContextProvider } from "./cms/context/CmsContext";
 
 require("./mocks");
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <CmsContextProvider value={{ theme: "yo" }}>
+      <Router>
+        <App />
+      </Router>
+    </CmsContextProvider>
   </React.StrictMode>,
   document.getElementById("root"),
 );
