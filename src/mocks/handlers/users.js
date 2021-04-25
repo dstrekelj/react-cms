@@ -3,7 +3,11 @@ import { rest } from "msw";
 const users = [];
 
 for (let i = 0; i < 100; i++) {
-  users.push({ type: "users", id: i, attributes: { username: `user${i}` } });
+  users.push({
+    type: "users",
+    id: i,
+    attributes: { username: `user${i}`, email: `user${i}@example.com` },
+  });
 }
 
 function getUser(id) {

@@ -1,8 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import qs from "qs";
+import { ModelReader } from "../../../cms/ModelReader";
 
-type DataTableProps<T> = {
+type DataTableProps<T extends object> = {
   meta: {
     offset: number;
     limit: number;
@@ -10,9 +11,11 @@ type DataTableProps<T> = {
     totalPages: number;
   };
   data: Array<T>;
+  reader: ModelReader<T>;
+  headers: string[];
 };
 
-function DataTable<T>(props: DataTableProps<T>) {
+function DataTable<T extends object>(props: DataTableProps<T>) {
   const history = useHistory();
 
   const changePagination = useCallback(
@@ -30,17 +33,19 @@ function DataTable<T>(props: DataTableProps<T>) {
   return (
     <div>
       <table>
-        <tbody>
+        <thead>
           <tr>
-            <th>ID</th>
-            <th>Username</th>
+            {props.headers.map((header) => (
+              <th key={header}>{header}</th>
+            ))}
           </tr>
+        </thead>
+        <tbody>
           {props.data.map((item, index) => (
-            <tr key={`tr-${index}`}>
-              {/* @ts-ignore */}
-              <td>{item?.id}</td>
-              {/* @ts-ignore */}
-              <td>{item?.attributes?.username}</td>
+            <tr key={`tr-${props.reader.getId(item)}`}>
+              {props.headers.map((header) => (
+                <td key={header}>{props.reader.getAttribute(item, header)}</td>
+              ))}
             </tr>
           ))}
         </tbody>
