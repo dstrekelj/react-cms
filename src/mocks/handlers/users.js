@@ -3,9 +3,11 @@ import { rest } from "msw";
 const users = [];
 
 for (let i = 0; i < 100; i++) {
+  const id = String(i);
+
   users.push({
     type: "users",
-    id: i,
+    id,
     attributes: { username: `user${i}`, email: `user${i}@example.com` },
   });
 }

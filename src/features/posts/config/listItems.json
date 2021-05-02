@@ -8,7 +8,7 @@
     "caption": "Author",
     "mapTo": "author.username",
     "component": "Link",
-    "componentOptions": {
+    "componentProps": {
       "url": "user/:id"
     }
   }

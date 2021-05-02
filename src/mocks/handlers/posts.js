@@ -3,15 +3,17 @@ import { rest } from "msw";
 const posts = [];
 
 for (let i = 0; i < 100; i++) {
+  const id = String(i);
+
   posts.push({
     type: "posts",
-    id: i,
+    id,
     attributes: { post: `Lorem ipsum ${i}` },
-    relationships: { author: { data: { type: "users", id: i } } },
+    relationships: { author: { data: { type: "users", id } } },
     included: [
       {
         type: "users",
-        id: i,
+        id,
         attributes: { username: `user${i}`, email: `user${i}@example.com` },
       },
     ],

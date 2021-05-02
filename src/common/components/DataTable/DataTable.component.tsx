@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import qs from "qs";
 import { ModelReader } from "../../../cms/ModelReader";
 
@@ -23,6 +23,7 @@ type DataTableProps<T extends object> = {
 
 function DataTable<T extends object>(props: DataTableProps<T>) {
   const history = useHistory();
+  const match = useRouteMatch();
 
   const changePagination = useCallback(
     (offset, limit) => {
@@ -51,7 +52,9 @@ function DataTable<T extends object>(props: DataTableProps<T>) {
             <tr key={`tr-${props.reader.getId(item)}`}>
               {props.items.map((listItem) => (
                 <td key={listItem.caption}>
-                  {props.reader.getAttribute(item, listItem.mapTo)}
+                  <Link to={`${match.url}/${props.reader.getId(item)}`}>
+                    {props.reader.getAttribute(item, listItem.mapTo)}
+                  </Link>
                 </td>
               ))}
             </tr>

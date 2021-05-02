@@ -1,0 +1,14 @@
+[
+  {
+    "mapTo": "id",
+    "component": "Text"
+  },
+  {
+    "mapTo": "author.username",
+    "component": "Text"
+  },
+  {
+    "mapTo": "post",
+    "component": "Text"
+  }
+]

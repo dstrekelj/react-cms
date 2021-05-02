@@ -1,0 +1,14 @@
+[
+  {
+    "mapTo": "id",
+    "component": "Text"
+  },
+  {
+    "mapTo": "username",
+    "component": "Text"
+  },
+  {
+    "mapTo": "email",
+    "component": "Text"
+  }
+]

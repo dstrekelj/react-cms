@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
-import { UsersList } from "../features/users";
-import { PostsList } from "../features/posts";
+import { UsersList, UsersView } from "../features/users";
+import { PostsList, PostsView } from "../features/posts";
 import { Link } from "react-router-dom";
 
 function App() {
@@ -16,8 +16,14 @@ function App() {
         </li>
       </ul>
       <Switch>
+        <Route path="/users/:id">
+          <UsersView />
+        </Route>
         <Route exact path="/users">
           <UsersList />
+        </Route>
+        <Route path="/posts/:id">
+          <PostsView />
         </Route>
         <Route exact path="/posts">
           <PostsList />
