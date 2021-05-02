@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
-import { UsersFeature } from "../features/users/UsersFeature";
-import { PostsFeature } from "../features/posts/PostsFeature";
+import { UsersList } from "../features/users";
+import { PostsList } from "../features/posts";
 import { Link } from "react-router-dom";
 
 function App() {
@@ -17,10 +17,10 @@ function App() {
       </ul>
       <Switch>
         <Route exact path="/users">
-          <UsersFeature />
+          <UsersList />
         </Route>
         <Route exact path="/posts">
-          <PostsFeature />
+          <PostsList />
         </Route>
         <Route>
           <Redirect to="/users" />
