@@ -4,12 +4,9 @@ import { DataTable } from "../../common/components/DataTable";
 import { Post } from "./models/Post";
 import { JsonApiModelReader } from "../../cms/JsonApiModelReader";
 import { ModelReader } from "../../cms/ModelReader";
-import { safeGet } from "../../common/utils";
+import listItems from "./config/listItems.json";
 
-const reader: ModelReader<Post> = new JsonApiModelReader<Post>({
-  author: (model) =>
-    String(safeGet(model, "included.0.attributes.username", "-")),
-});
+const reader: ModelReader<Post> = new JsonApiModelReader<Post>();
 
 export const PostsFeature = () => {
   const [state, setState] = useState({
@@ -29,8 +26,8 @@ export const PostsFeature = () => {
       <DataTable<Post>
         data={state.data}
         meta={state.meta}
-        headers={["id", "author"]}
         reader={reader}
+        items={listItems}
       />
     </div>
   );

@@ -3,6 +3,12 @@ import { useHistory } from "react-router-dom";
 import qs from "qs";
 import { ModelReader } from "../../../cms/ModelReader";
 
+type ListItem = {
+  caption: string;
+  mapTo: string;
+  component: string;
+};
+
 type DataTableProps<T extends object> = {
   meta: {
     offset: number;
@@ -12,7 +18,7 @@ type DataTableProps<T extends object> = {
   };
   data: Array<T>;
   reader: ModelReader<T>;
-  headers: string[];
+  items: ListItem[];
 };
 
 function DataTable<T extends object>(props: DataTableProps<T>) {
@@ -35,16 +41,18 @@ function DataTable<T extends object>(props: DataTableProps<T>) {
       <table>
         <thead>
           <tr>
-            {props.headers.map((header) => (
-              <th key={header}>{header}</th>
+            {props.items.map((item) => (
+              <th key={item.caption}>{item.caption}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {props.data.map((item, index) => (
             <tr key={`tr-${props.reader.getId(item)}`}>
-              {props.headers.map((header) => (
-                <td key={header}>{props.reader.getAttribute(item, header)}</td>
+              {props.items.map((listItem) => (
+                <td key={listItem.caption}>
+                  {props.reader.getAttribute(item, listItem.mapTo)}
+                </td>
               ))}
             </tr>
           ))}

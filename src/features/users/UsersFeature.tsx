@@ -4,6 +4,7 @@ import { DataTable } from "../../common/components/DataTable";
 import { User } from "./models/User";
 import { JsonApiModelReader } from "../../cms/JsonApiModelReader";
 import { ModelReader } from "../../cms/ModelReader";
+import listItems from "./config/listItems.json";
 
 const reader: ModelReader<User> = new JsonApiModelReader<User>();
 
@@ -25,8 +26,8 @@ export const UsersFeature = () => {
       <DataTable<User>
         data={state.data}
         meta={state.meta}
-        headers={["id", "username", "email"]}
         reader={reader}
+        items={listItems}
       />
     </div>
   );
