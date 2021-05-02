@@ -7,9 +7,6 @@
   {
     "caption": "Author",
     "mapTo": "author.username",
-    "component": "Link",
-    "componentProps": {
-      "url": "user/:id"
-    }
+    "component": "Text"
   }
 ]

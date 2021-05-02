@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { DataView } from "../../common/components/DataView";
 import { User } from "./models/User";
 import { JsonApiModelReader } from "../../cms/JsonApiModelReader";
