@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Link, useRouteMatch } from "react-router-dom";
-import { DataView } from "../../common/components/DataView";
+import { useParams, useHistory } from "react-router-dom";
+import { DataForm } from "../../common/components/DataForm";
 import { User } from "./models/User";
 import { JsonApiModelReader } from "../../cms/JsonApiModelReader";
 import { ModelReader } from "../../cms/ModelReader";
-import viewItems from "./config/viewItems.json";
+import formItems from "./config/formItems.json";
 
 const reader: ModelReader<User> = new JsonApiModelReader<User>();
 
-export const UsersView = () => {
+export const UsersForm = () => {
   const [state, setState] = useState<{ data: any } | null>(null);
   const params = useParams<{ id: string }>();
   const history = useHistory();
-  const match = useRouteMatch();
 
   useEffect(() => {
     fetch("https://api.mock/api/users/" + params.id)
@@ -31,10 +30,15 @@ export const UsersView = () => {
         >
           Back
         </button>
-        <Link to={`${match.url}/edit`}>Edit</Link>
       </div>
       <div>
-        <DataView<User> data={state?.data} reader={reader} items={viewItems} />
+        {state && (
+          <DataForm<User>
+            data={state?.data}
+            reader={reader}
+            items={formItems}
+          />
+        )}
       </div>
     </div>
   );

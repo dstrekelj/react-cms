@@ -1,0 +1,17 @@
+[
+  {
+    "name": "username",
+    "component": "Input",
+    "componentProps": {
+      "required": true
+    }
+  },
+  {
+    "name": "email",
+    "component": "Input",
+    "componentProps": {
+      "type": "email",
+      "required": true
+    }
+  }
+]
