@@ -1,5 +1,6 @@
 import { ModelReader, ModelReaderAttributeMap } from "./ModelReader";
 import { JsonApiResource } from "./model/JsonApiResource";
+import { safeGet } from "../common/utils";
 
 export class JsonApiModelReader<T extends JsonApiResource>
   implements ModelReader<T> {
@@ -16,11 +17,11 @@ export class JsonApiModelReader<T extends JsonApiResource>
 
     switch (attribute) {
       case "id":
-        return String(model.id);
+        return String(safeGet(model, "id"));
       case "type":
-        return String(model.type);
+        return String(safeGet(model, "type"));
       default:
-        return String(model.attributes[attribute]);
+        return String(safeGet(model, "attributes." + attribute));
     }
   }
 

@@ -1,0 +1,15 @@
+[
+  {
+    "caption": "ID",
+    "mapTo": "id",
+    "component": "Text"
+  },
+  {
+    "caption": "Author",
+    "mapTo": "author.username",
+    "component": "Link",
+    "componentOptions": {
+      "url": "user/:id"
+    }
+  }
+]

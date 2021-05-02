@@ -4,9 +4,11 @@ import { DataTable } from "../../common/components/DataTable";
 import { Post } from "./models/Post";
 import { JsonApiModelReader } from "../../cms/JsonApiModelReader";
 import { ModelReader } from "../../cms/ModelReader";
+import { safeGet } from "../../common/utils";
 
 const reader: ModelReader<Post> = new JsonApiModelReader<Post>({
-  author: (model) => String(model?.included?.[0]?.attributes?.username),
+  author: (model) =>
+    String(safeGet(model, "included.0.attributes.username", "-")),
 });
 
 export const PostsFeature = () => {

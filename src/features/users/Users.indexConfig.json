@@ -1,0 +1,17 @@
+[
+  {
+    "caption": "ID",
+    "mapTo": "id",
+    "component": "Text"
+  },
+  {
+    "caption": "Username",
+    "mapTo": "username",
+    "component": "Text"
+  },
+  {
+    "caption": "Email",
+    "mapTo": "email",
+    "component": "Text"
+  }
+]
