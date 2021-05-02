@@ -15,12 +15,13 @@ type DataFormProps<T extends object> = {
   data: T;
   reader: ModelReader<T>;
   items: FormItem[];
+  onSubmit: (data: any) => void;
 };
 
 function DataForm<T extends object>(props: DataFormProps<T>) {
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => console.log(JSON.stringify(data));
+  const onSubmit = props.onSubmit;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

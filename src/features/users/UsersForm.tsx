@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { DataForm } from "../../common/components/DataForm";
 import { User } from "./models/User";
@@ -19,6 +19,20 @@ export const UsersForm = () => {
       .then((json) => setState(json));
   }, [params.id]);
 
+  const onSubmit = useCallback(
+    (body) => {
+      fetch("https://api.mock/api/users/" + params.id, {
+        method: "PATCH",
+        body: JSON.stringify({
+          type: "users",
+          id: params.id,
+          attributes: body,
+        }),
+      });
+    },
+    [params.id],
+  );
+
   return (
     <div>
       <div>
@@ -37,6 +51,7 @@ export const UsersForm = () => {
             data={state?.data}
             reader={reader}
             items={formItems}
+            onSubmit={onSubmit}
           />
         )}
       </div>

@@ -20,6 +20,18 @@ function storeUser(user) {
   users.push(user);
 }
 
+function updateUser(newUser) {
+  const userIndex = users.findIndex((user) => user.id === newUser.id);
+  const oldUser = users[userIndex];
+
+  users[userIndex] = {
+    ...oldUser,
+    attributes: { ...oldUser.attributes, ...newUser.attributes },
+  };
+
+  return users[userIndex];
+}
+
 function removeUser(id) {
   const userIndex = users.findIndex((user) => user.id === id);
 
@@ -73,9 +85,11 @@ export const handlers = [
   }),
 
   rest.patch("https://api.mock/api/users/:id", (req, res, ctx) => {
+    const user = updateUser(JSON.parse(req.body));
+
     return res(
       ctx.json({
-        data: JSON.parse(req.body),
+        data: user,
       }),
     );
   }),
